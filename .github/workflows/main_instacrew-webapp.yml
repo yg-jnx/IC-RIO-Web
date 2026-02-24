@@ -25,11 +25,12 @@ jobs:
           npm install
           npm run build
 
+      # Package everything needed at runtime, including .next
       - name: Prepare app artifact
         run: |
           mkdir -p deploy
-          cp -R .next package.json package-lock.json public deploy/
-          # copy config files if you have them
+          cp -R .next node_modules package.json package-lock.json public deploy/
+          # include config files if they exist
           if [ -f next.config.js ]; then cp next.config.js deploy/; fi
           if [ -f tsconfig.json ]; then cp tsconfig.json deploy/; fi
 
